@@ -12,5 +12,3 @@
 ```js
 console.log("코드영역");
 ```
-
-commit / push
