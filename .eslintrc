@@ -2,18 +2,31 @@
     "parser": "babel-eslint",
     "parserOptions": {
       "ecmaVersion": 6,
-      "sourceType": "module"
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
     },
-    "plugins": ["import", "node", "promise", "standard"],
+    "plugins": ["react", "import", "node", "promise", "standard", "react-hooks"], //부가적 규칙
+    "settings": {
+      "react": {
+        "createClass": "createReactClass",
+        "pragma": "React",
+        "version": "detect"
+      },
     "env": {
       "browser": true,
-      "node": true,
-    },
+      "node": true
+    },//브라우저와 노드, 2가지 환경에서 js가 돌아갈 수 있도록 한다
     "extends": [
       "eslint:recommended",
-      "plugin:prettier/recommended"
-    ],
+      "plugin:react/recommended",
+      "plugin:prettier/recommended"//프리티어 확장 모듈을 쓰겠다
+    ],//기본 기둥이 되는 룰 eslint에서 기본 추천되는 룰 기준으로 개발 하겠다
     "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
       "no-console": "warn"
-    }
+    }// 커스텀 룰: error - 금지 / warn - 경고 / off - 써도 됨
   }
+}
