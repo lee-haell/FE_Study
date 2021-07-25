@@ -1,0 +1,4 @@
+{
+    "presets": ["@babel/preset-env"]
+}
+//바벨 설정 추가
