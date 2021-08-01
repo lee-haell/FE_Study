@@ -1,87 +1,58 @@
-const todos = [
-  {
-    id: 0,
-    label: '밥먹기',
-    isDone: false, // 완료 여부 체크 상태 값
-  },
-  {
-    id: 1,
-    label: '공부하기',
-    isDone: true, // 완료 여부 체크 상태 값
-  },
-]
+//클래스는 대문자로 시작
+//객체를 만드는 방법 중의 하나
+//객체를 만들어내는 틀
 
-/**
- * 배열
- *
- * 새로운 TODO 추가하기
- * push => []
- * https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Spread_syntax
- *
- * 요즘은 전개구문을 이용하여 값을 추가하는것이 대부분이다
- */
-const addedTodos = [
-  ...todos,
-  {
-    id: 2,
-    label: '추가된 TODO',
-    isDone: false, // 방금 추가한 값들은 항상 isDone false
-  },
-] // ... 은 알맹이들을 풀어낸다
+// var todo = { todo: [] }와 같은 의미, 하지만 매번 생성해야하는 문제
 
-console.log('addedTodos', addedTodos)
+class TodoManager {
+  //클래스가 만들어질 때 제일 먼저 동작하는 함수
+  //값을 초기화하는 곳, 처음 만들어질 때 동작할 함수들 정의
+  constructor() {
+    this.todos = []
+    //this=todo 자기자신
 
-/**
- * 값의 삭제
- *
- * slice, splice (X)
- *
- * filter 를 이용하여 값을 삭제한다
- */
-// 이름을 짓기 나름이지만 todos의 반복이니 todo
-const removedTodos = addedTodos.filter((todo) => {
-  return todo.id !== 2
-})
+    // this.getTodos = () => {
+    //   return this.todos
+    // }
+  }
 
-console.log('removedTodos', removedTodos)
+  //프로토타입
+  //constructor 밖에 있는 영역은 부모의 주머니
+  //기존의 todo와 새로운 todo를 합친다
+  addTodo(label) {
+    this.todos = [
+      ...this.todos,
+      {
+        id: this.todos.length + 1,
+        label, //label: label > key, value값이 같으면 생략 가능
+        isDone: false,
+      },
+    ]
+  }
+  removeTodo(id) {
+    this.todos = this.todos.filter((todo) => {
+      return todo.id !== id
+    })
+  }
+  updateTodo(id) {
+    this.todos = this.todos.map((todo) => {
+      return todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
+    })
+  }
+  isAllCompleted() {
+    return this.todos.every((todo) => {
+      return todo.isDone
+    })
+  }
+  hasCompleted() {
+    return this.todos.some((todo) => {
+      return todo.isDone
+    })
+  }
+}
 
-/*
-    값의 업데이트
-    
-    map > 원본 배열을 갖고 새로운 배열 생성
+//만들 때는 new 키워드 사용
+// var todo = new Todo()
 
-    - 0의 id를 가진 todo의 isDOne값을 true로 바꾸고 싶다면,
-    업데이트가 완료된 배열에는 0번째 id를 가진 todo는 isDone이 true일 것이다.
-    
-*/
-
-const updatedTodos = addedTodos.map((todo) => {
-  //   if (todo.id === 0) {
-  //     //업데이트 해야됨
-  //     return { ...todo, isDone: !todo.isDone } //현재 상태를 한번 뒤집는다.
-  //   } else {
-  //     // 업데이트 필요없음
-  //     return todo
-  //   }
-
-  return todo.id === 0 ? { ...todo, isDone: !todo.isDone } : todo
-  //위의 조건문 리팩토링
-})
-
-console.log('updatedTodos', updatedTodos)
-
-// var obj = { a: 10, b: 20 }
-// var copyObj = { ...obj, c: 30 }
-
-/*
-    some(OR), every(AND)
-*/
-const isAllCompleted = todos.every((todo) => {
-  return todo.isDone
-})
-console.log('isAllCompleted', isAllCompleted)
-
-const hasCompleted = todos.some((todo) => {
-  return todo.isDone
-})
-console.log('hasCompleted', hasCompleted)
+export default TodoManager
+//Todo를 내보냄

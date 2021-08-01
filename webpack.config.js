@@ -1,5 +1,7 @@
 const path = require('path')
 
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 // module.exports 밖에서 가져다 쓸 수 있도록 내보낸다.
 module.exports = {
   // __dirname = 지금 나의 (=파일) 경로
@@ -9,7 +11,7 @@ module.exports = {
   entry: path.resolve(__dirname, './src/index.js'),
   // output 빌드 결과물을 내보내는 곳
   output: {
-    filename: 'bundle.js',
+    filename: 'bundle.[hash].js',
     // 나를 기준으로 ./dist 폴더 안에 빌드 결과물을 생성할 것
     path: path.resolve(__dirname, 'dist'),
   },
@@ -27,5 +29,16 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js'],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html', //어떤 html 파일을 기준으로 동작을 할 것인가
+      filename: './index.html', //이름을 어떻게 내보낼 것인가. ouput path를 따라간다
+    }),
+  ],
+  devServer: {
+    contentBase: path.resolve(__dirname, 'dist'),
+    hot: true, // 저장했을 때 바로 반영해줌
+    open: true, //알아서 devserver 열어줌
   },
 }
