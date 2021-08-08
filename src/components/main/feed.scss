@@ -1,0 +1,31 @@
+.wrap_feed {
+    .feed {
+        .header{
+            display: flex;
+            align-items: center;
+            padding: 20px 10px 15px 10px;
+
+            img {
+                width: 42px;
+                height: 42px;
+                object-fit: cover;
+                border-radius: 50%;
+                margin-right: 14px;
+            }
+
+            .info {
+                .txt_name {
+                    font-weight: 600;
+                    margin-bottom: 4px;
+                }
+                .txt_location {
+                    font-size: 12px;
+                }
+            }
+        }
+        img {
+            width: 100%;
+            object-fit: cover;
+        }
+    }   
+}

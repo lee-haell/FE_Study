@@ -1,0 +1,36 @@
+.wrap_header {
+    display: flex;
+    border-bottom: 1px solid #efefef;
+    justify-content: space-between;
+    height: 65px;
+    align-items: center;
+    padding: 0 20px;
+
+    .logo {
+        width: 103px;
+        height: 29px;
+    }
+
+    .wrap_user {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            width: 25px;
+            height: 25px;
+            border-radius: 20px;
+            object-fit: cover;
+            margin-left: 10px;
+        }
+
+        button {
+            color: #000;
+            background: #fff;
+            font-weight: bold;
+            border-radius: 3px;
+            padding: 5px 10px;
+            border: 1px solid #808080;
+        }
+    }
+}
